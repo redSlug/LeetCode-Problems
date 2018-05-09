@@ -1,4 +1,10 @@
 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class Solution:
     def minCostClimbingStairs(self, cost):
@@ -21,7 +27,37 @@ class Solution:
         cache[i] = min_cost
         return min_cost
 
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        count_0, count_1, count_2 = 0, 0, 0
+
+        for n in nums:
+            if n == 0:
+                count_0 += 1
+            elif n == 1:
+                count_1 += 1
+            else:
+                count_2 += 1
+
+        for i in range(len(nums)):
+            if count_0:
+                nums[i] = 0
+                count_0 -= 1
+            elif count_1:
+                nums[i] = 1
+                count_1 -= 1
+            else:
+                nums[i] = 2
+                count_2 -=1
+
 
 s = Solution()
 assert s.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]) == 6
 assert s.minCostClimbingStairs([10, 15, 20]) == 15
+a = [1, 0, 1, 2]
+s.sortColors(a)
+print(a)
+assert a == [0,1,1,2]
